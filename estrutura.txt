@@ -1,12 +1,7 @@
 GITHUB
-	marciobene
-		DWE
-			HTML
-			CSS
-			PHP
-			JQUERY
-			SQL
-		GPR
-		PSI
-		QSW
+   marciobene
+      DWE
+	(arquivos HTML, PHP e outros)
+	SQL
+	  (Esquema_do_BD.sql)
 	

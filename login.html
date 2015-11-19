@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RaspIoT - Internet das Coisas com Raspberry Pi</title>
+    <meta charset="utf-8" />
+
+    <style>
+      html, body{
+        font-family: verdana;
+        width: 400px;
+      }
+      header{
+        color: red;
+        font-size: 50px;
+        width: 100%;
+        text-align: center;
+      }
+      fieldset{
+        background-color: #cccccc;
+        width: 98%px;
+        border-width: 3px;
+        border-color: #005000;
+      }
+      legend{
+        color: #003300;
+        font-size: 12px;
+      }
+     .campo{
+        width: 80px; 
+        display: inline-block;
+        color: #000000;
+        font-size: 12px;
+        font-weight: bolder;
+      }
+      .botao{
+        float: right;
+        width: 100px;
+      }
+      .deletar{
+        font-size: 10px;
+        color: black;
+        text-align: left;
+        font-style: italic;
+      }
+      footer{
+        font-size: 10px;
+        text-align: center;
+        background-color: #008000;
+      }  
+      a{
+        color: black;
+      }
+    </style>
+  </head>
+  <script type="text/javascript">
+    function Cancelar(){
+      location.href="index.php"
+    }
+  </script>
+  <body>
+    <header>
+      <label><b>RaspIoT</b></label>
+    </header>
+      <section>
+        <form action="login_realizado.php" method="post">
+          <fieldset>
+            <legend>Autenticação de Cadastro</legend>
+            <label class="campo" for="email">e-mail:</label>
+            <input type="text" name="email" id="email" size="35" />
+            <br />
+            <label class="campo" for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha" />
+            <br /><br />  
+            <input class="botao" type="submit" value="Entrar" />
+            <input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />
+            
+          </fieldset>
+    </form>
+      </section>
+    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marciobene@gmail.com">
+  marciobene@gmail.com</a></p></footer>
+  </body>
+</html>
