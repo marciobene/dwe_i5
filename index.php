@@ -89,5 +89,10 @@
         <p class="texto">O objetivo deste projeto é ampliar o escopo da pesquisa de Iniciação Científica iniciada em 2014, período no qual fora desenvolvido um monitor de temperatura, o qual alertava localmente quando a temperatura excedesse um limite estipulado. A ampliação do projeto envolve as seguintes etapas adicionais: implementar uma aplicação web para apresentar as leituras feitas pelo Raspberry Pi, criar a placa eletrônica para o monitor, fazer uma maquete para demonstrar o efetivo funcionamento da aplicação e, principalmente, fornecer conteúdo para futuros projetos.</p>
       </fieldset>
     </section>
-    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a class="link_email" href="mailto:marciobene@gmail.com">marciobene@gmail.com</a></p></footer>
+    <footer>
+      <p>
+        <b>Por: </b>Márcio Benê<br>
+        <b>Contato: </b><a class="link_email" href="mailto:marcio.rbs@gmail.com">marcio.rbs@gmail.com</a>
+      </p>
+    </footer>
 </html>

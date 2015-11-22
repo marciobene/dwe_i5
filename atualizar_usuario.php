@@ -2,6 +2,9 @@
 
   session_start();
 
+  ini_set('display_errors', 0 );
+  error_reporting(0);
+  
   $email     = $_POST['email'];
   $_SESSION['mail'] = $email;
 
@@ -53,10 +56,8 @@
       .botao{
         float: right;
       }
-      .deletar{
-        font-size: 10px;
-        color: black;
-        text-align: right;
+      #bt_del{
+        color: red;
         font-style: italic;
       }
       footer{
@@ -73,10 +74,21 @@
     <header>
       <label><b>RaspIoT</b></label>
     </header>
+      <script type="text/javascript">
+        function confirmaApagarConta(){
+
+        }
+        var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
+          console.log(sessaoaberta);
+          if (sessaoaberta == ""){
+           alert("Logar no Sistema!!!");
+           location.href="index.php";
+          }
+      </script>
       <section>
-        <form action="usuario_atualizado.php" method="post">
-          <fieldset>
-            <legend>Atualizar Usuário</legend>
+        <fieldset>
+          <legend>Atualizar Usuário</legend>
+          <form action="usuario_atualizado.php" method="post">
             <?php
               foreach($dbh->query($sql) as $linha){
                 echo '<label class="campo" for="nome">Nome:</label>';
@@ -86,25 +98,38 @@
                 echo '<label class="campo" for="idade">Idade:</label>';
                 echo "<input type='idade' name='idade' id='idade' maxlength='2' size='2' value='{$linha['idade']}' /><br>";
                 echo '<label class="campo" for="email">*e-mail:</label>';
-                echo "<input type='text' name='email' id='email' size='30' value='{$linha['email']}'/><br>";
+                echo "<input type='text' name='email' id='email' size='30' required='required' value='{$linha['email']}'/><br>";
                 echo '<label class="campo" for="estado">Estado:</label>';
                 echo "<input type='text' name='estado' id='estado' maxlength='2' size='2' value='{$linha['estado']}' /><br>";
                 echo '<label class="campo" for="cidade">Cidade:</label>';
-                echo "<input type='text' name='cidade' id='cidade' size='30' value='{$linha['cidade']}' />";
-                echo '<br />';
+                echo "<input type='text' name='cidade' id='cidade' size='30' value='{$linha['cidade']}' /><br>";
                 echo '<label class="campo" for="senha">*Senha:</label>';
-                echo "<input type='password' name='senha' id='senha' value='{$linha['senha']}' /><br>";
+                echo "<input type='password' name='senha' id='senha' required='required' value='{$linha['senha']}' /><br>";
               }
             ?>
             <label class="aviso" >* Campos Obrigatórios</label>
             <br />
-            <input class="botao" type="button" onClick="history.go(-1)" value="Cancelar" />
             <input class="botao" type="submit" value="Atualizar" />
-            <br />
-          </fieldset>
-        </form>
+          </form>
+          <form action="inicio.php" method="post" >
+            <?php
+              echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+            ?>
+            <input class="botao" type="submit" id="cancelar" value="Cancelar" />
+          </form>
+          <form action="usuario_deletado.php" method="post" onsubmit = "return confirm('Tem certeza que deseja deletar sua conta?');">
+            <?php
+              echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+            ?>
+            <input class="botao" type="submit" id="bt_del" value="Deletar Cadastro" />
+          </form>
+        </fieldset>
       </section>
-    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marciobene@gmail.com">
-  marcio.rbs@gmail.com</a></p></footer>
+    <footer>
+      <p>
+        <b>Por: </b>Márcio Benê<br>
+        <b>Contato: </b><a class="link_email" href="mailto:marcio.rbs@gmail.com">marcio.rbs@gmail.com</a>
+      </p>
+    </footer>
   </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
-  $nome      = $_POST['nome'];
-  $sobrenome = $_POST['sobrenome'];
-  $idade     = $_POST['idade'];
-  $email     = $_POST['email'];
-  $estado    = $_POST['estado'];
-  $cidade    = $_POST['cidade'];
-  $senha     = $_POST['senha'];
+  $nome      = $_GET['nome'];
+  $sobrenome = $_GET['sobrenome'];
+  $idade     = $_GET['idade'];
+  $email     = $_GET['email'];
+  $estado    = $_GET['estado'];
+  $cidade    = $_GET['cidade'];
+  $senha     = $_GET['senha'];
 
   $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
   
@@ -50,7 +50,7 @@
   </head>
   <script type="text/javascript">
     function Cancelar(){
-      location.href="index.html"
+      location.href="index.php"
     }
   </script>
   <body>
@@ -63,8 +63,7 @@
           echo "CADASTRADO COM SUCESSO<br />";
           echo '<input class="botao" type="button" onClick="Cancelar()" value="OK" /><br />';
         }else{
-          echo "ERRO AO CADASTRAR!<br />";
-          echo "Preencher todos os campos<br />";
+          echo "ERRO AO CADASTRAR!<br /><br />";
           echo '<input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />';
           echo '<input class="botao" type="button" onClick="history.go(-1)" value="Tentar Novamente" /><br />';
         }

@@ -31,6 +31,10 @@
         color: #000000;
         font-size: 12px;
         font-weight: bolder;
+      }      
+      .aviso{
+        text-align: center;
+        font-size: 9px;
       }
       .botao{
         float: right;
@@ -46,10 +50,7 @@
         font-size: 10px;
         text-align: center;
         background-color: #008000;
-      }  
-      a{
-        color: black;
-      }
+      } 
     </style>
   </head>
   <script type="text/javascript">
@@ -65,12 +66,14 @@
         <form action="login_realizado.php" method="post">
           <fieldset>
             <legend>Autenticação de Cadastro</legend>
-            <label class="campo" for="email">e-mail:</label>
-            <input type="text" name="email" id="email" size="35" />
+            <label class="campo" for="email">*e-mail:</label>
+            <input type="text" name="email" id="email" size="35" required="required"/>
             <br />
-            <label class="campo" for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha" />
-            <br /><br />  
+            <label class="campo" for="senha">*Senha:</label>
+            <input type="password" name="senha" id="senha" required="required"/>
+            <br />
+            <label class="aviso" >* Campos Obrigatórios</label>
+            <br />
             <input class="botao" type="submit" value="Entrar" />
             <input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />
             

@@ -43,10 +43,7 @@
         font-size: 10px;
         text-align: center;
         background-color: #008000;
-      }  
-      a{
-        color: black;
-      }
+      } 
     </style>
   </head>
   <script type="text/javascript">
@@ -59,29 +56,29 @@
       <label><b>RaspIoT</b></label>
     </header>
       <section>
-        <form action="usuario_cadastrado.php">
+        <form action="usuario_cadastrado.php" method="get">
           <fieldset>
             <legend>Cadastro de Usuário</legend>
             <label class="campo" for="email">*e-mail:</label>
-            <input type="text" name="email" id="email" size="30" />
+            <input type="text" name="email" id="email" required="required" size="30" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
             <br />
             <label class="campo" for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" size="30"/>
+            <input type="text" name="nome" id="nome" size="30" />
             <br />
             <label class="campo" for="sobrenome">Sobrenome:</label>
-            <input type="text" name="sobrenome" id="sobrenome" size="30" />
+            <input type="text" name="sobrenome" id="sobrenome" size="30"/>
             <br />
             <label class="campo" for="idade">Idade:</label>
-            <input type="text" name="idade" id="idade" maxlength="2" size="2"/>
+            <input type="text" name="idade" id="idade" maxlength="2" size="2" pattern="[0-9]{1,2,3}"/>
             <br />
             <label class="campo" for="estado">Estado:</label>
-            <input type="text" name="estado" id="estado" maxlength="2" size="2"/>
+            <input type="text" name="estado" id="estado" maxlength="2" size="2" pattern="[A-Z]{2}"/>
             <br />
             <label class="campo" for="cidade">Cidade:</label>
-            <input type="text" name="cidade" id="cidade" size="30" />
+            <input type="text" name="cidade" id="cidade" size="30"/>
             <br />  
             <label class="campo" for="senha">*Senha:</label>
-            <input type="password" name="senha" id="senha" />
+            <input type="password" name="senha" id="senha"  required="required"/>
             <br />
             <label class="aviso" >* Campos Obrigatórios</label>
             <br />
@@ -95,9 +92,9 @@
             <input class="botao" type="reset" value="Limpar" />
             <input class="botao" type="submit" value="Cadastrar" />
           </fieldset>
-    </form>
+        </form>
       </section>
-    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marciobene@gmail.com">
-  marciobene@gmail.com</a></p></footer>
+    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marcio.rbs@gmail.com">
+  marcio.rbs@gmail.com</a></p></footer>
   </body>
 </html>

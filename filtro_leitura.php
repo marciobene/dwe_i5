@@ -1,28 +1,54 @@
 <?php
+  session_start();
 
-  $data_inicial     = $_POST['data_inicial'];
-  $data_final     = $_POST['data_final'];
+  ini_set('display_errors', 0 );
+  error_reporting(0);
+  
+  $email     = $_POST['email'];
+  $_SESSION['mail'] = $email;
+
+  $data_inicial     = $_POST["data_inicial"];
+  $data_final     = $_POST["data_final"];
   $valor_minimo     = $_POST['valor_minimo'];
   $valor_maximo     = $_POST['valor_maximo'];
-  $opcao            = isset($_POST['opcao']) ? $_POST['opcao'] : '';
+  $opcao            = isset($_POST["opcao"]) ? $_POST["opcao"] : '';
 
-  if(!empty($data_inicial) && !empty($data_final) && !empty($valor_minimo) && !empty($valor_maximo)){
-    if($opcao == "e"){
-      $sql = "SELECT data_leitura, valor FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1";
-    }
-  }else if(!empty($data_inicial) || !empty($data_final)){
-    
-    $sql = "SELECT data_leitura, valor FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND id = 1";
-  }else if(!empty($valor_minimo) || !empty($valor_maximo)){
-    
-    $sql = "SELECT data_leitura, valor FROM leituras WHERE valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1";
-  }else{
-    $sql = 'SELECT data_leitura, valor FROM leituras';
+  if(empty($data_inicial)){
+    $data_inicial = "01-01-01";
+  }
+  if (empty($data_final)){
+    $data_final = "01-01-2099";
+  }
+  if (empty($valor_minimo)){
+    $valor_minimo = 0;
+  }
+  if (empty($valor_maximo)){
+    $valor_maximo = 1000000;
   }
 
-  $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
+  /* VERIFICAR VARIÁVEIS
   
-  $conectado = $dbh->exec($sql);
+  echo $data_inicial;
+  echo $data_final;
+  echo $valor_minimo;
+  echo $valor_maximo;
+  echo $opcao;
+
+  */
+
+  $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
+
+  if((!empty($data_inicial) || !empty($data_final)) && (!empty($valor_minimo) || !empty($valor_maximo))){
+    $sql = "SELECT valor, data_leitura FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1 ORDER BY data_leitura DESC";
+  }else if((empty($data_inicial) && empty($data_final)) && (!empty($valor_minimo) || !empty($valor_maximo))){
+    $sql = "SELECT data_leitura, valor FROM leituras WHERE valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1 ORDER BY data_leitura DESC";
+  }else if((empty($valor_minimo) && empty($valor_maximo)) && (!empty($data_inicial) || !empty($data_final))){
+    $sql = "SELECT valor, data_leitura FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND id = 1 ORDER BY data_leitura DESC";
+  }else{
+    $sql = 'SELECT data_leitura, valor FROM leituras ORDER BY data_leitura DESC';
+  }
+
+  //echo $resultado = $dbh->exec($sql);
 
 ?>
 <!DOCTYPE html>
@@ -86,18 +112,23 @@
         background-color: #008000;
         width: 100%;
       }  
-      a{
-        color: black;
-      }
     </style>
   </head>
+  <script type="text/javascript">
+    var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
+      console.log(sessaoaberta);
+      if (sessaoaberta == ""){
+        alert("Logar no Sistema!!!");
+        location.href="index.php";
+      }
+  </script>
   <body>
     <div id="wrap">
       <header>
         <label><b>RaspIoT</b></label>
       </header>
         <section>
-          <form action=".php">
+          <form action="sensor1.php" method="POST">
             <fieldset>
               <legend>Leituras - Sensor 1</legend>
               <?php
@@ -115,12 +146,19 @@
               }
               ?>
               <br />
-              <input class="botao" type="button" onClick="history.go(-1)" value="Voltar" />
+              <?php
+                echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+              ?>
+              <input class="botao" type="submit" value="Voltar" />
             </fieldset>
           </form>
         </section>
     </div>
-      <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marciobene@gmail.com">marciobene@gmail.com</a></p>
-      </footer>
+      <footer>
+      <p>
+        <b>Por: </b>Márcio Benê<br>
+        <b>Contato: </b><a class="link_email" href="mailto:marcio.rbs@gmail.com">marcio.rbs@gmail.com</a>
+      </p>
+    </footer>
   </body>
 </html>

@@ -1,5 +1,12 @@
 <?php
+  session_start();
+
+  ini_set('display_errors', 0 );
+  error_reporting(0);
+  
   $email     = $_POST['email'];
+  $_SESSION['mail'] = $email;
+
   $senha     = $_POST['senha'];
 
   $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
@@ -38,9 +45,6 @@
         text-align: center;
         background-color: #008000;
       }  
-      a{
-        color: black;
-      }
     </style>
   </head>
   <script type="text/javascript">
@@ -50,6 +54,13 @@
     function Cancelar(){
       location.href="index.html"
     }
+
+    var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
+      console.log(sessaoaberta);
+      if (sessaoaberta == ""){
+        alert("Logar no Sistema!!!");
+        location.href="index.php";
+      }
   </script>
   <body>
     <header>
@@ -77,7 +88,7 @@
       <p>
         <b>Por: </b>Márcio Benê<br>
         <b>Contato: </b>
-        <a href="mailto:marciobene@gmail.com">
+        <a href="mailto:marcio.rbs@gmail.comm">
           marciobene@gmail.com
         </a>
       </p>

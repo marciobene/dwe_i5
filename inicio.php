@@ -1,6 +1,9 @@
 ﻿<?php
   session_start();
 
+  ini_set('display_errors', 0 );
+  error_reporting(0);
+  
   $email     = $_POST['email'];
   $_SESSION['mail'] = $email;
 
@@ -71,6 +74,17 @@
       
     </style>
   </head>
+  <script type="text/javascript">
+
+    var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
+      console.log(sessaoaberta);
+      if (sessaoaberta == ""){
+        alert("Logar no Sistema!!!");
+        location.href="index.php";
+      }
+      
+    
+  </script>
   <body>
     <header>
       <table id="tabela_titulo">
@@ -102,7 +116,12 @@
       <table id="tabela_menu">
         <tr>
           <td class="menu">
-            <a class="link" href="sensor1.html">Sensor 1</a>
+            <form id="sensor1" action="sensor1.php" method="POST">
+              <?php
+                echo "<input type='hidden' name='email' id='email' value='{$_SESSION['mail']}' />";
+              ?>
+              <a class="link" href="javascript:{}" onclick="document.getElementById('sensor1').submit()">Sensor 1</a>
+            </form>
           </td>
           <td class="menu">
             Sensor 2
@@ -129,5 +148,10 @@
         <p class="texto"></p>
       </fieldset>
     </section>
-    <footer><p><b>Por: </b>Márcio Benê<br><b>Contato: </b><a href="mailto:marciobene@gmail.com">marciobene@gmail.com</a></p></footer>
+    <footer>
+      <p>
+        <b>Por: </b>Márcio Benê<br>
+        <b>Contato: </b><a class="link_email" href="mailto:marcio.rbs@gmail.com">marcio.rbs@gmail.com</a>
+      </p>
+    </footer>
 </html>
