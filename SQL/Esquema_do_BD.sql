@@ -5,14 +5,25 @@ sobrenome varchar(20),
 cidade varchar(15),
 estado varchar(2),
 idade varchar(3),
-senha varchar(20) NOT NULL
+senha varchar(20) NOT NULL,
+admin boolean
 );
+
+insert into usuario values ('admin', 'a', 'a', 'a', 'a', '20', 'admin', true);
+
+CREATE TABLE log(
+email varchar(50),
+data timestamp
+);
+
 
 CREATE TABLE sensor(
 id numeric PRIMARY KEY,
 nome_sensor varchar(15),
 descricao varchar(25)
 );
+
+insert into sensor values (1, 'Temperatura', 'LM35');
 
 CREATE TABLE leituras(
 data_leitura timestamp,
@@ -91,150 +102,7 @@ insert into leituras values ('	14/04/2010	05:07:54	', 	144.5	,	1	);
 insert into leituras values ('	15/06/2010	14:56:54	', 	146	,	1	);
 insert into leituras values ('	16/08/2011	00:45:54	', 	147.5	,	1	);
 
-insert into leituras values ('	10/10/2010	05:13:54	', 	123.5	,	2	);
-insert into leituras values ('	11/12/2010	14:02:54	', 	128	,	2	);
-insert into leituras values ('	11/02/2010	00:31:33	', 	134	,	2	);
-insert into leituras values ('	14/04/2010	10:40:21	', 	141.5	,	2	);
-insert into leituras values ('	15/06/2010	20:29:49	', 	144.5	,	2	);
-insert into leituras values ('	16/08/2011	05:13:54	', 	147.5	,	2	);
-insert into leituras values ('	10/10/2011	14:02:54	', 	123.6	,	2	);
-insert into leituras values ('	11/12/2011	00:31:33	', 	140	,	2	);
-insert into leituras values ('	11/02/2012	10:40:21	', 	146	,	2	);
-insert into leituras values ('	14/04/2012	20:29:49	', 	141.6	,	2	);
-insert into leituras values ('	15/06/2012	05:13:54	', 	144.6	,	2	);
-insert into leituras values ('	10/10/2014	14:02:54	', 	147.6	,	2	);
-insert into leituras values ('	11/12/2014	00:31:33	', 	123.7	,	2	);
-insert into leituras values ('	11/02/2015	10:40:21	', 	152	,	2	);
-insert into leituras values ('	14/04/2015	20:29:49	', 	158	,	2	);
-insert into leituras values ('	15/06/2014	05:13:54	', 	141.7	,	2	);
-insert into leituras values ('	11/02/2010	14:02:54	', 	144.7	,	2	);
-insert into leituras values ('	14/04/2010	00:31:33	', 	147.7	,	2	);
-insert into leituras values ('	15/06/2010	10:40:21	', 	123.8	,	2	);
-insert into leituras values ('	16/08/2011	20:29:49	', 	164	,	2	);
-insert into leituras values ('	10/10/2011	05:13:54	', 	170	,	2	);
-insert into leituras values ('	11/12/2011	14:02:54	', 	141.8	,	2	);
-insert into leituras values ('	11/02/2012	00:31:33	', 	144.8	,	2	);
-insert into leituras values ('	14/04/2012	10:40:21	', 	147.8	,	2	);
-insert into leituras values ('	15/06/2012	20:29:49	', 	123.9	,	2	);
-insert into leituras values ('	10/10/2014	05:13:54	', 	176	,	2	);
-insert into leituras values ('	11/12/2014	14:02:54	', 	182	,	2	);
-insert into leituras values ('	11/02/2015	00:31:33	', 	141.9	,	2	);
-insert into leituras values ('	14/04/2015	10:40:21	', 	144.9	,	2	);
-insert into leituras values ('	15/06/2014	20:29:49	', 	147.9	,	2	);
-insert into leituras values ('	11/02/2010	05:13:54	', 	123.10	,	2	);
-insert into leituras values ('	14/04/2010	14:02:54	', 	188	,	2	);
-insert into leituras values ('	15/06/2010	00:31:33	', 	194	,	2	);
-insert into leituras values ('	16/08/2011	10:40:21	', 	141.10	,	2	);
-insert into leituras values ('	10/10/2011	20:29:49	', 	144.10	,	2	);
-insert into leituras values ('	11/12/2011	05:13:54	', 	147.10	,	2	);
-insert into leituras values ('	11/02/2012	14:02:54	', 	123.11	,	2	);
-insert into leituras values ('	14/04/2012	00:31:33	', 	200	,	2	);
-insert into leituras values ('	15/06/2012	10:40:21	', 	206	,	2	);
-insert into leituras values ('	10/10/2014	20:29:49	', 	141.11	,	2	);
-insert into leituras values ('	11/12/2014	05:13:54	', 	144.11	,	2	);
-insert into leituras values ('	11/02/2015	14:02:54	', 	147.11	,	2	);
-insert into leituras values ('	14/04/2015	00:31:33	', 	123.12	,	2	);
-insert into leituras values ('	15/06/2014	10:40:21	', 	212	,	2	);
-insert into leituras values ('	11/02/2010	20:29:49	', 	218	,	2	);
-insert into leituras values ('	14/04/2010	05:13:54	', 	141.12	,	2	);
-insert into leituras values ('	15/06/2010	14:02:54	', 	144.12	,	2	);
-insert into leituras values ('	16/08/2011	00:31:33	', 	147.12	,	2	);
-insert into leituras values ('	10/10/2011	10:40:21	', 	123.13	,	2	);
-insert into leituras values ('	11/12/2011	20:29:49	', 	224	,	2	);
-insert into leituras values ('	11/02/2012	05:13:54	', 	230	,	2	);
-insert into leituras values ('	14/04/2012	14:02:54	', 	141.13	,	2	);
-insert into leituras values ('	15/06/2012	00:31:33	', 	144.13	,	2	);
-insert into leituras values ('	10/10/2014	10:40:21	', 	147.13	,	2	);
-insert into leituras values ('	11/12/2014	20:29:49	', 	123.14	,	2	);
-insert into leituras values ('	11/02/2015	05:13:54	', 	236	,	2	);
-insert into leituras values ('	14/04/2015	14:02:54	', 	242	,	2	);
-insert into leituras values ('	15/06/2014	00:31:33	', 	141.14	,	2	);
-insert into leituras values ('	11/02/2010	10:40:21	', 	144.14	,	2	);
-insert into leituras values ('	14/04/2010	20:29:49	', 	147.14	,	2	);
-insert into leituras values ('	15/06/2010	05:13:54	', 	123.15	,	2	);
-insert into leituras values ('	16/08/2011	14:02:54	', 	248	,	2	);
-insert into leituras values ('	10/10/2011	00:31:33	', 	254	,	2	);
-insert into leituras values ('	11/12/2011	10:40:21	', 	141.15	,	2	);
-insert into leituras values ('	11/02/2012	20:29:49	', 	144.15	,	2	);
-insert into leituras values ('	14/04/2012	05:13:54	', 	147.15	,	2	);
-insert into leituras values ('	15/06/2012	14:02:54	', 	123.16	,	2	);
-insert into leituras values ('	10/10/2014	00:31:33	', 	260	,	2	);
-insert into leituras values ('	11/12/2014	10:40:21	', 	266	,	2	);
-
-insert into leituras values ('	10/10/2010	05:13:54	', 	33	,	3	);
-insert into leituras values ('	11/12/2010	14:02:54	', 	11	,	3	);
-insert into leituras values ('	11/02/2010	00:31:33	', 	76	,	3	);
-insert into leituras values ('	14/04/2010	10:40:21	', 	22	,	3	);
-insert into leituras values ('	15/06/2010	20:29:49	', 	12	,	3	);
-insert into leituras values ('	16/08/2011	05:13:54	', 	30	,	3	);
-insert into leituras values ('	10/10/2011	14:02:54	', 	44	,	3	);
-insert into leituras values ('	11/12/2011	00:31:33	', 	34	,	3	);
-insert into leituras values ('	11/02/2012	10:40:21	', 	76	,	3	);
-insert into leituras values ('	14/04/2012	20:29:49	', 	22	,	3	);
-insert into leituras values ('	15/06/2012	05:13:54	', 	12	,	3	);
-insert into leituras values ('	10/10/2014	14:02:54	', 	30	,	3	);
-insert into leituras values ('	11/12/2014	00:31:33	', 	32	,	3	);
-insert into leituras values ('	11/02/2015	10:40:21	', 	32	,	3	);
-insert into leituras values ('	14/04/2015	20:29:49	', 	32	,	3	);
-insert into leituras values ('	15/06/2014	05:13:54	', 	32	,	3	);
-insert into leituras values ('	11/02/2010	14:02:54	', 	32	,	3	);
-insert into leituras values ('	14/04/2010	00:31:33	', 	31	,	3	);
-insert into leituras values ('	15/06/2010	10:40:21	', 	31	,	3	);
-insert into leituras values ('	16/08/2011	20:29:49	', 	31	,	3	);
-insert into leituras values ('	10/10/2011	05:13:54	', 	31	,	3	);
-insert into leituras values ('	11/12/2011	14:02:54	', 	31	,	3	);
-insert into leituras values ('	11/02/2012	00:31:33	', 	30	,	3	);
-insert into leituras values ('	14/04/2012	10:40:21	', 	30	,	3	);
-insert into leituras values ('	15/06/2012	20:29:49	', 	30	,	3	);
-insert into leituras values ('	10/10/2014	05:13:54	', 	30	,	3	);
-insert into leituras values ('	11/12/2014	14:02:54	', 	30	,	3	);
-insert into leituras values ('	11/02/2015	00:31:33	', 	29	,	3	);
-insert into leituras values ('	14/04/2015	10:40:21	', 	29	,	3	);
-insert into leituras values ('	15/06/2014	20:29:49	', 	29	,	3	);
-insert into leituras values ('	11/02/2010	05:13:54	', 	29	,	3	);
-insert into leituras values ('	14/04/2010	14:02:54	', 	29	,	3	);
-insert into leituras values ('	15/06/2010	00:31:33	', 	29	,	3	);
-insert into leituras values ('	16/08/2011	10:40:21	', 	28	,	3	);
-insert into leituras values ('	10/10/2011	20:29:49	', 	28	,	3	);
-insert into leituras values ('	11/12/2011	05:13:54	', 	28	,	3	);
-insert into leituras values ('	11/02/2012	14:02:54	', 	28	,	3	);
-insert into leituras values ('	14/04/2012	00:31:33	', 	28	,	3	);
-insert into leituras values ('	15/06/2012	10:40:21	', 	27	,	3	);
-insert into leituras values ('	10/10/2014	20:29:49	', 	27	,	3	);
-insert into leituras values ('	11/12/2014	05:13:54	', 	27	,	3	);
-insert into leituras values ('	11/02/2015	14:02:54	', 	27	,	3	);
-insert into leituras values ('	14/04/2015	00:31:33	', 	27	,	3	);
-insert into leituras values ('	15/06/2014	10:40:21	', 	26	,	3	);
-insert into leituras values ('	11/02/2010	20:29:49	', 	26	,	3	);
-insert into leituras values ('	14/04/2010	05:13:54	', 	26	,	3	);
-insert into leituras values ('	15/06/2010	14:02:54	', 	26	,	3	);
-insert into leituras values ('	16/08/2011	00:31:33	', 	26	,	3	);
-insert into leituras values ('	10/10/2011	10:40:21	', 	26	,	3	);
-insert into leituras values ('	11/12/2011	20:29:49	', 	25	,	3	);
-insert into leituras values ('	11/02/2012	05:13:54	', 	25	,	3	);
-insert into leituras values ('	14/04/2012	14:02:54	', 	25	,	3	);
-insert into leituras values ('	15/06/2012	00:31:33	', 	25	,	3	);
-insert into leituras values ('	10/10/2014	10:40:21	', 	25	,	3	);
-insert into leituras values ('	11/12/2014	20:29:49	', 	24	,	3	);
-insert into leituras values ('	11/02/2015	05:13:54	', 	24	,	3	);
-insert into leituras values ('	14/04/2015	14:02:54	', 	24	,	3	);
-insert into leituras values ('	15/06/2014	00:31:33	', 	24	,	3	);
-insert into leituras values ('	11/02/2010	10:40:21	', 	24	,	3	);
-insert into leituras values ('	14/04/2010	20:29:49	', 	23	,	3	);
-insert into leituras values ('	15/06/2010	05:13:54	', 	23	,	3	);
-insert into leituras values ('	16/08/2011	14:02:54	', 	23	,	3	);
-insert into leituras values ('	10/10/2011	00:31:33	', 	23	,	3	);
-insert into leituras values ('	11/12/2011	10:40:21	', 	23	,	3	);
-insert into leituras values ('	11/02/2012	20:29:49	', 	23	,	3	);
-insert into leituras values ('	14/04/2012	05:13:54	', 	22	,	3	);
-insert into leituras values ('	15/06/2012	14:02:54	', 	22	,	3	);
-insert into leituras values ('	10/10/2014	00:31:33	', 	22	,	3	);
-insert into leituras values ('	11/12/2014	10:40:21	', 	22	,	3	);
-
-insert into sensor values (1, 'Temperatura', 'XPTO-sensor');
-insert into sensor values (2, 'Humidade', 'WET-sensor');
-insert into sensor values (3, 'Presenca', 'HI-sensor');
-
 select * from usuario;
 select * from leituras;
 select * from sensor;
+select * from log;

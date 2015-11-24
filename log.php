@@ -7,48 +7,11 @@
   $email     = $_POST['email'];
   $_SESSION['mail'] = $email;
 
-  $data_inicial     = $_POST["data_inicial"];
-  $data_final     = $_POST["data_final"];
-  $valor_minimo     = $_POST['valor_minimo'];
-  $valor_maximo     = $_POST['valor_maximo'];
-  $opcao            = isset($_POST["opcao"]) ? $_POST["opcao"] : '';
-
-  if(empty($data_inicial)){
-    $data_inicial = "01-01-01";
-  }
-  if (empty($data_final)){
-    $data_final = "01-01-2099";
-  }
-  if (empty($valor_minimo)){
-    $valor_minimo = 0;
-  }
-  if (empty($valor_maximo)){
-    $valor_maximo = 1000000;
-  }
-
-  /* VERIFICAR VARIÁVEIS
-  
-  echo $data_inicial;
-  echo $data_final;
-  echo $valor_minimo;
-  echo $valor_maximo;
-  echo $opcao;
-
-  */
-
   $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
 
-  if((!empty($data_inicial) || !empty($data_final)) && (!empty($valor_minimo) || !empty($valor_maximo))){
-    $sql = "SELECT valor, data_leitura FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1 ORDER BY data_leitura DESC";
-  }else if((empty($data_inicial) && empty($data_final)) && (!empty($valor_minimo) || !empty($valor_maximo))){
-    $sql = "SELECT data_leitura, valor FROM leituras WHERE valor > '$valor_minimo' AND valor < '$valor_maximo' AND id = 1 ORDER BY data_leitura DESC";
-  }else if((empty($valor_minimo) && empty($valor_maximo)) && (!empty($data_inicial) || !empty($data_final))){
-    $sql = "SELECT valor, data_leitura FROM leituras WHERE data_leitura > '$data_inicial' AND data_leitura < '$data_final' AND id = 1 ORDER BY data_leitura DESC";
-  }else{
-    $sql = 'SELECT data_leitura, valor FROM leituras ORDER BY data_leitura DESC';
-  }
+  $sql = 'SELECT * FROM log ORDER BY data DESC';
 
-  //echo $resultado = $dbh->exec($sql);
+  $resultado = $dbh->exec($sql);
 
 ?>
 <!DOCTYPE html>
@@ -128,25 +91,25 @@
         <label><b>RaspIoT</b></label>
       </header>
         <section>
-          <form action="sensor1.php" method="POST">
+          <form action="atualizar_usuario.php" method="POST">
             <fieldset>
-              <legend>Leituras - Sensor de Temperatura LM35</legend>
+              <legend>Log de acessos de usuários</legend>
               <?php
+              echo '<table>';
+              echo '<label><b>Data e Hora de acesso por usuário:</b></label>';
+              foreach($dbh->query($sql) as $linha){
                 echo '<table>';
-                echo '<th>Data e Hora</th><th>Temperatura</th>';
-                foreach($dbh->query($sql) as $linha){
+                echo "<tr>";
+                echo "<td class='larg'>";
+                echo "{$linha['data']}<b></b>";
+                echo "</td>";
+                echo "<td class='larg'>";
+                echo "{$linha['email']}<b></b>";
+                echo "</td>";
+                echo "</tr>";
                 
-                  echo "<tr>";
-                  echo "<td class='larg'>";
-                  echo "{$linha['data_leitura']}<b></b>";
-                  echo "</td>";
-                  echo "<td class='larg'>";
-                  echo "{$linha['valor']}<b></b>";
-                  echo "</td>";
-                  echo "</tr>";
-                
-                }
-                echo '</table>';
+              }
+              echo '</table>';
               ?>
               <br />
               <?php

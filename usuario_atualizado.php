@@ -71,20 +71,28 @@
       <label><b>RaspIoT</b></label>
     </header>
     <section>
-      <form action="inicio.php" method="post">
       <?php
+          
         if($conectado){
-          echo "ATUALIZADO COM SUCESSO<br />";
-          echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
-          echo '<input class="botao" type="submit" value="OK" /><br />';
+          echo '<form action="inicio.php" method="post">';
+            echo "ATUALIZADO COM SUCESSO<br />";
+            echo "<input type='hidden' name='email1' id='email1' value={$_SESSION['mail']} />";
+            echo '<input class="botao" type="submit" value="OK" /><br />';
+          echo "</form>";
         }else{
-          echo "ERRO AO ATUALIZAR!<br />";
-          echo '<input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />';
-          echo '<input class="botao" type="button" onClick="history.go(-1)" value="Tentar Novamente" /><br />';
+          echo '<form action="inicio.php" method="post">';
+            echo "ERRO AO ATUALIZAR!<br />";
+            echo "<input type='hidden' name='email1' id='email1' value={$_SESSION['mail']} />";
+            echo '<input class="botao" type="submit" value="Cancelar" />';
+          echo "</form>";
+          echo '<form action="atualizar_usuario.php" method="post">';
+            echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+            echo '<input class="botao" type="submit" value="Tentar Novamente" />';
+          echo "</form>";
         }
 
       ?>
-      </form>
+      
     </section>
     <footer>
       <p>

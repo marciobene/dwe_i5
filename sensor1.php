@@ -49,6 +49,10 @@
         font-size: 13px;
         font-weight: bolder;
       }
+      .expl{
+        text-align: justify;
+        text-indent: 35px;
+      }
      .campo{
         display: inline-block;
         color: #000000;
@@ -112,9 +116,9 @@
         <section>
           
           <fieldset>
-            <legend>Sensor 1</legend>
+            <legend>Sensor De Temperatura - LM35</legend>
             <form action="filtro_leitura.php" method="POST" onsubmit = "return checar_filtro()">
-               <p class="texto">Configure o filtro para buscar as leituras desejadas:</p>
+              <p class="texto">Configure o filtro para buscar as leituras desejadas:</p>
               <label class="campo" for="data_inicial">Data inicial:</label>
               <input class="campo" type="date" name="data_inicial" id="data_inicial" />
               <label class="campo" for="data_final">Data final:</label>
@@ -138,10 +142,44 @@
             </form>
             <form action="inicio.php" method="POST">
               <?php
-                echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+                echo "<input type='hidden' name='email1' id='email1' value={$_SESSION['mail']} />";
               ?>
               <input class="botao" type="submit" value="Finalizar" />
-            </form> 
+            </form><br><br><hr>
+            <p class="expl"><br>
+              <b>ESQUEMA ELETRÔNICO</b><br><br>
+              Para o esquema eletrônico foram utilizados os seguintes componentes:<br><br>
+              • LM35 – Sensor de temperatura;<br>
+              • LM358 – Circuito integrado com dois amplificadores operacional;<br>
+              • Potenciômetro<br>
+              • Resistores de 3.3K, 10K, 33K, 100K;<br><br>
+            </p>
+            <p>
+              <b>Segue representação do esquema eletrônico:</b><br>
+              <img src="lm35.png"/><br>
+            </p>
+            <p class="expl">
+              O objetivo é o LM35 ficar monitorando a temperatura. 
+              Este componente tem por característica variar a sua tensão de saída com a variação 
+              da temperatura e para facilitar esta variação é proporcional entre tensão e 
+              temperatura, formando uma reta, se representado graficamente.
+            </p>
+            <p class="expl">
+              A ideia é, através de um dos amplificadores operacionais do LM358 utilizado 
+              como comparador, comparar a tensão de saída do LM35, com a tensão de saída 
+              do potenciômetro, a segunda regulada conforme a temperatura limite estipulada. 
+              Quando a tensão de saída do LM35 ultrapassar a tensão de saída do potenciômetro, 
+              o comparador emite um sinal digital para o Raspberry, que interpreta o sinal 
+              e executa as ações.
+            </p>
+            <p class="expl">
+              No entanto, a variação da tensão do LM35 é muito discreta, 
+              dificultando a regulagem do potenciômetro e, principalmente, 
+              ficando muito sensível à instabilidade do sistema elétrico. 
+              Diante disso, foi utilizado o outro amplificador operacional 
+              do LM358 para amplificar a tensão de saída do LM35, proporcionando 
+              uma regulagem mais precisa da faixa de temperatura.
+            </p>
           </fieldset>
           
         </section>

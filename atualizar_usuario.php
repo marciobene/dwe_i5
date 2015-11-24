@@ -105,24 +105,40 @@
                 echo "<input type='text' name='cidade' id='cidade' size='30' value='{$linha['cidade']}' /><br>";
                 echo '<label class="campo" for="senha">*Senha:</label>';
                 echo "<input type='password' name='senha' id='senha' required='required' value='{$linha['senha']}' /><br>";
+                echo '<label class="aviso" >* Campos Obrigatórios</label><br />';
               }
+
             ?>
-            <label class="aviso" >* Campos Obrigatórios</label>
-            <br />
+            
             <input class="botao" type="submit" value="Atualizar" />
-          </form>
-          <form action="inicio.php" method="post" >
-            <?php
-              echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
-            ?>
-            <input class="botao" type="submit" id="cancelar" value="Cancelar" />
-          </form>
-          <form action="usuario_deletado.php" method="post" onsubmit = "return confirm('Tem certeza que deseja deletar sua conta?');">
-            <?php
-              echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
-            ?>
-            <input class="botao" type="submit" id="bt_del" value="Deletar Cadastro" />
-          </form>
+            </form>
+            <form action="inicio.php" method="post" >
+              <?php
+                echo "<input type='hidden' name='email1' id='email1' value={$_SESSION['mail']} />";
+              ?>
+              <input class="botao" type="submit" id="cancelar" value="Cancelar" />
+            </form>
+            <form action="usuario_deletado.php" method="post" onsubmit = "return confirm('Tem certeza que deseja deletar sua conta?');">
+              <?php
+                echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+              ?>
+              <input class="botao" type="submit" id="bt_del" value="Deletar Cadastro" />
+            </form><br><br>
+            
+          <?php
+            foreach($dbh->query($sql) as $item){
+              if ($item['admin'] == 1){ 
+                    echo '<label class="campo" for="admin">Admin:</label>';
+                    echo "<input type='checkbox' name='admin' checked='checked'/>";
+                    echo '<form action="log.php" method="post">';
+                      echo "<input type='hidden' name='email' id='email' value={$_SESSION['mail']} />";
+                      echo '<input class="log" type="submit" value="Consultar LOG de acesso" /><br>';
+                    echo "</form>";
+              }
+            }
+          ?>
+
+          
         </fieldset>
       </section>
     <footer>

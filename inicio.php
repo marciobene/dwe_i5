@@ -1,10 +1,6 @@
 ﻿<?php
   session_start();
-
-  ini_set('display_errors', 0 );
-  error_reporting(0);
-  
-  $email     = $_POST['email'];
+  $email = $_POST['email1'];
   $_SESSION['mail'] = $email;
 
 ?>
@@ -61,7 +57,7 @@
       .texto{
         font-size: 12px;
         text-align: justify;
-        text-indent: 35px;\
+        text-indent: 35px;
       }
       footer{
         font-size: 10px;
@@ -75,13 +71,13 @@
     </style>
   </head>
   <script type="text/javascript">
-
+/*
     var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
       console.log(sessaoaberta);
       if (sessaoaberta == ""){
         alert("Logar no Sistema!!!");
         location.href="index.php";
-      }
+      }*/
       
     
   </script>
@@ -120,14 +116,14 @@
               <?php
                 echo "<input type='hidden' name='email' id='email' value='{$_SESSION['mail']}' />";
               ?>
-              <a class="link" href="javascript:{}" onclick="document.getElementById('sensor1').submit()">Sensor 1</a>
+              <a class="link" href="javascript:{}" onclick="document.getElementById('sensor1').submit()">Sensor de Temperatura - LM35</a>
             </form>
           </td>
           <td class="menu">
-            Sensor 2
+            Sensor 2 - (em breve)
           </td>
           <td class="menu">
-            Sensor 3
+            Sensor 3 - (em breve)
           </td>
           <td class="menu">
             <a class="link" href="index.php">Sair</a>
@@ -144,7 +140,7 @@
         <p class="texto">O projeto de pesquisa tem como objetivo principal trabalhar de forma prática dois temas em relevância na atualidade: Internet das Coisas e Minicomputadores de baixo custo, aplicando uma das inúmeras formas de interação entre estes conceitos e fornecendo conteúdo de estudo para futuros projetos.</p>
         <p class="texto">A base dos estudos será através da continuidade do projeto de pesquisa de Iniciação Científica iniciada em 2014, Estudo da Aplicabilidade de Sistemas em Java sobre a Plataforma do Raspberry (SILVA; LEDEL, 2014), a qual resultou no desenvolvimento de um sistema eletrônico, que faz monitoramento de temperatura controlado pela plataforma do Raspberry Pi.</p>
         <p class="texto">O presente sistema Web fará parte do projeto de pesquisa. Onde será possível consultar as leituras feitas pelo sistema eletrônico através da plataforma do Raspberry Pi. Reforçando assim as caractísticas de Internet das coisas</p>
-        <p class="texto">Para consultar as leituras feitas pelo sistema eletrônico de monitoramento de temperatura, basta escolher um dos sensores no menu acima.</p>
+        <p class="texto"><b>Para consultar as leituras feitas pelo sistema eletrônico, basta escolher um dos sensores no menu acima.</b></p>
         <p class="texto"></p>
       </fieldset>
     </section>

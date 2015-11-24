@@ -3,20 +3,26 @@
 
   ini_set('display_errors', 0 );
   error_reporting(0);
-  
-  $email     = $_POST['email'];
-  $_SESSION['mail'] = $email;
 
+  $email     = $_POST['email'];
   $senha     = $_POST['senha'];
 
   $dbh = new PDO('pgsql:host=localhost; port=5432; dbname=iot', 'postgres', '123');
   
-  $sql = "SELECT email, senha FROM usuario WHERE email = '$email'";
+  $sql = "SELECT email, senha FROM usuario WHERE email = '$email' AND senha = '$senha'";
 
   $conectado = $dbh->exec($sql);
 
-?>
+  /*
+    echo " email: $email <br>";
+    echo " senha: $senha <br>";
+    echo " sql: $sql <br>";
+    echo " conectado: $conectado <br>";
+    echo $dbh->exec($sql);
 
+  */
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,43 +50,42 @@
         font-size: 10px;
         text-align: center;
         background-color: #008000;
-      }  
+      }
     </style>
   </head>
   <script type="text/javascript">
-    function Ok(){
-      location.href="inicio.html"
-    }
     function Cancelar(){
-      location.href="index.html"
+      location.href="index.php"
     }
 
-    var sessaoaberta = "<?php echo $_SESSION['mail'];?>";
-      console.log(sessaoaberta);
-      if (sessaoaberta == ""){
-        alert("Logar no Sistema!!!");
-        location.href="index.php";
-      }
   </script>
   <body>
     <header>
       <label><b>RaspIoT</b></label>
     </header>
     <section>
-      <form action="inicio.php" method="post">
+      <form action="inicio.php" method="POST">
         <?php
+          $auth = 0;
           foreach($dbh->query($sql) as $item){
-            if ($item['senha'] != $senha){
-              echo "<br />USUÁRIO OU SENHA INCORRETOS!<br /><br />";
-              echo '<input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />';
-              echo '<input class="botao" type="button" onClick="history.go(-1)" value="Tentar Novamente" /><br />';
-            }else{
-              echo "<br />AUTENTICADO COM SUCESSO<br /><br />";
-              echo "<input type='hidden' name='email' id='email' value={$item['email']} />";
-              echo '<input class="botao" type="submit" value="ENTRAR NA PÁGINA" /><br />';
-              
-            }
+            $auth = 1;
+            $email_banco = $item['email'];
+            $senha_banco = $item['senha'];
           }
+          if (($email_banco == $email) && ($senha_banco == $senha)){
+              echo "<br />AUTENTICADO COM SUCESSO<br />";
+              $sql1 = "INSERT INTO log VALUES ('$email', now())";
+              $loginput = $dbh->exec($sql1);
+              echo "<input type='hidden' name='email1' id='email1' value={$item['email']} />";
+              echo '<input class="botao" type="submit" value="ENTRAR NA PÁGINA" /><br />';
+          }
+          
+          if($auth == 0){
+            echo "<br />SENHA OU USUÁRIO INCORRETO!<br /><br />";
+            echo '<input class="botao" type="button" onClick="Cancelar()" value="Cancelar" />';
+            echo '<input class="botao" type="button" onClick="history.go(-1)" value="Tentar Novamente" /><br />';
+          }
+          
         ?>
       </form>
     </section>
@@ -88,7 +93,7 @@
       <p>
         <b>Por: </b>Márcio Benê<br>
         <b>Contato: </b>
-        <a href="mailto:marcio.rbs@gmail.comm">
+        <a href="mailto:marciobene@gmail.com">
           marciobene@gmail.com
         </a>
       </p>
