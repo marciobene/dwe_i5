@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Impostômetro de Salário
+    </title>
+    <meta charset="utf-8" />
+    <style>
+      html{
+        max-width: 500px;
+        font-family: Arial, Helvetica, sans-serif;
+        position: relative;
+        margin: 0 auto;
+
+      }
+      header{
+        background-color: black;
+        color: #009900;
+        text-align: center;
+        font-size: 20px;
+
+      }
+      fieldset{
+        background-color: #cccccc;
+        text-align: center;
+      }
+      legend{
+        text-align: left;
+      }
+      label{
+        font-size: 15px;
+
+      }
+      footer{
+        text-align: center;
+        background-color: #009900;
+        font-size: 12px;
+        v
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      $ Impostômetro de Salário $<br />
+      <hr />
+    </header>
+    <section>
+      <fieldset>
+        <legend><b>
+          Cálculo do INSS e IR sobre salário
+        </legend></b>
+            <label for="salario" >Entre com seu salário bruto: </label>
+            <input type="number" name="salario" id="sal" required="required"/> 
+            <button onclick="CalcularImposto()" >Calcular</button>
+			<script type="text/javascript">
+				var descINSS = 0;
+				var desc_IRcomDeducao = 0;
+				var sal_liq = 0;
+				function CalcularImposto(){
+					var salario = document.getElementById("sal").value;
+					
+					if (salario > 4663.75){
+						var descINSS = 4663.75 * 0.11;
+            var INSSporc = "11%";
+						var sal_semINSS = salario - descINSS;
+						if (sal_semINSS > 4664.68){  
+							var desc_IRcomDeducao = (sal_semINSS * 0.275) - 869.36;
+							var IRporc = "27,5%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+						else if (sal_semINSS > 3751.05){
+							var desc_IRcomDeducao = (sal_semINSS * 0.225) - 636.13;
+							var IRporc = "22,5%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+					}	
+					else if (salario > 2331.88){
+						var descINSS = salario * 0.11;
+						var INSSporc = "11%";
+            var sal_semINSS = salario - descINSS;
+						if (sal_semINSS > 3751.05){  
+							var desc_IRcomDeducao = (sal_semINSS * 0.225) - 636.13;
+							var IRporc = "22,5%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+						else if (sal_semINSS > 2826.65){
+							var desc_IRcomDeducao = (sal_semINSS * 0.15) - 354.8;
+							var IRporc = "15%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+						else if (sal_semINSS > 1903.98){
+							var desc_IRcomDeducao = (sal_semINSS * 0.075) - 142.8;
+							var IRporc = "7,5%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+					}
+					else if (salario > 1399.12){
+						var descINSS = salario * 0.09;
+						var INSSporc = "9%";
+            var sal_semINSS = salario - descINSS;
+						if (sal_semINSS > 1903.98){  
+							var desc_IRcomDeducao = (sal_semINSS * 0.075) - 142.8;
+							var IRporc = "7,5%";
+              var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						}
+						else{
+							var desc_IRcomDeducao = 0;
+							var sal_liq = sal_semINSS - desc_IRcomDeducao;
+						  var IRporc = "0%";
+            }
+					}else{
+						var descINSS = salario * 0.08;
+						var INSSporc = "8%";
+            var sal_semINSS = salario - descINSS;
+						var sal_liq = sal_semINSS;
+            var IRporc = "0%";
+					}
+          document.write("<!DOCTYPE html><html><head><title>Impostômetro de Salário</title><meta charset='utf-8' /><style>html{max-width: 500px;font-family: Arial, Helvetica, sans-serif;position: relative;margin: 0 auto;}");
+          document.write("header{background-color: black;color: #009900;text-align: center;font-size: 20px;}fieldset{background-color: #cccccc;text-align: center;}legend{text-align: left;}");
+          document.write("label{font-size: 15px;}footer{text-align: center;background-color: #009900;font-size: 12px;}.result{text-align: left;font-size: 12px;}</style></head><body><header>$ Impostômetro de Salário $<br /><hr />");
+          document.write("</header><section><fieldset><legend><b>Cálculo do INSS e IR sobre salário</legend>");
+					document.write("<p class='result'>SALÁRIO BRUTO:        "+salario+"<br><br>Desconto de INSS:     "+descINSS+"  =   "+INSSporc+"<br>");
+					document.write("Desconto de IR:        "+desc_IRcomDeducao+"  =   "+IRporc+"<br><br>");
+					document.write("SALÁRIO LÍQUIDO: "+sal_liq+" <br></p>");
+          document.write('<a href="index.html">Voltar</a>');
+					document.write("</fieldset></section><footer><p><b>Por: </b>Márcio Benê - Prontuário 1320734<br><b>Contato: </b><a class='link_email' href='mailto:marcio.rbs@gmail.com'>marcio.rbs@gmail.com</a>");
+          document.write("</p></footer></html>");
+				}	
+            </script> 
+		  
+      </fieldset>
+    </section>
+    <footer>
+      <p>
+        <b>Por: </b>Márcio Benê - Prontuário 1320734<br>
+        <b>Contato: </b><a class="link_email" href="mailto:marcio.rbs@gmail.com">marcio.rbs@gmail.com</a>
+      </p>
+    </footer>
+</html>
